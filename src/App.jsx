@@ -20,7 +20,7 @@ export default function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/gender-health-care/signingoogle", {
+      .get("/api/gender-health-care/signingoogle", {
         withCredentials: true,
       })
       .then((res) => {
