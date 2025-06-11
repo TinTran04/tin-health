@@ -19,19 +19,24 @@ export default function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get("/api/gender-health-care/signingoogle", {
-        withCredentials: true,
-      })
-      .then((res) => {
+    // Check if we're in development and backend might not be available
+    const checkBackendAndFetchUser = async () => {
+      try {
+        const res = await axios.get("/api/gender-health-care/signingoogle", {
+          withCredentials: true,
+          timeout: 5000, // 5 second timeout
+        });
         setUser(res.data.user);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Lỗi khi lấy thông tin người dùng:", err);
+      } catch (err) {
+        console.warn("Backend server not available or user not authenticated:", err.message);
+        // Set user to null instead of throwing error
         setUser(null);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    checkBackendAndFetchUser();
   }, []);
 
   if (loading) {
