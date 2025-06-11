@@ -6,7 +6,7 @@ export default function Header() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/gender-health-care/signingoogle", {
+      .get("/api/gender-health-care/signingoogle", {
         withCredentials: true,
       })
       .then((res) => setUser(res.data.user))
@@ -16,7 +16,7 @@ export default function Header() {
   const handleLogout = () => {
     axios
       .post(
-        "http://localhost:8080/gender-health-care/logout",
+        "/api/gender-health-care/logout",
         {},
         {
           withCredentials: true,
@@ -104,7 +104,7 @@ export default function Header() {
           ) : (
             <>
               <a
-                href="http://localhost:8080/oauth2/authorization/google"
+                href="/api/oauth2/authorization/google"
                 className="flex flex-col shrink-0 items-center bg-[#8C66D9] text-white py-[9px] px-8 rounded-xl font-bold no-underline shadow-md transition transform hover:bg-[#734ebf] hover:scale-105 hover:shadow-lg"
                 style={{ textDecoration: "none" }}
               >

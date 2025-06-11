@@ -9,7 +9,11 @@ export default defineConfig({
     port: 5173,       // cố định port bạn muốn dùng, ví dụ 5173 hoặc 3000
     strictPort: true, // nếu port 5173 đang bị chiếm, sẽ báo lỗi chứ không tự động tăng port
     proxy: {
-      '/api': 'http://localhost:8080',
+      '/api': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        secure: false,
+      }
     }
   },
 });
